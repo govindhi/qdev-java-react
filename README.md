@@ -10,6 +10,7 @@ A simple task management application with a Java Spring Boot backend and React f
 - Set task priority (low, medium, high)
 - Set due dates for tasks
 
+
 ## Tech Stack
 
 ### Backend
