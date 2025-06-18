@@ -11,7 +11,18 @@ const TaskForm = ({ onSubmit, initialData, onCancel }) => {
       setTitle(initialData.title || '');
       setDescription(initialData.description || '');
       setPriority(initialData.priority || 'MEDIUM');
-      setDueDate(initialData.dueDate ? initialData.dueDate.substring(0, 16) : '');
+      
+      // Format the date properly for datetime-local input
+      if (initialData.dueDate) {
+        // Convert ISO string to local datetime format (YYYY-MM-DDThh:mm)
+        const date = new Date(initialData.dueDate);
+        const localDatetime = new Date(date.getTime() - (date.getTimezoneOffset() * 60000))
+          .toISOString()
+          .substring(0, 16);
+        setDueDate(localDatetime);
+      } else {
+        setDueDate('');
+      }
     }
   }, [initialData]);
 
@@ -24,6 +35,11 @@ const TaskForm = ({ onSubmit, initialData, onCancel }) => {
       priority,
       dueDate: dueDate ? new Date(dueDate).toISOString() : null
     };
+    
+    // If editing, preserve the completed status
+    if (initialData && initialData.completed !== undefined) {
+      taskData.completed = initialData.completed;
+    }
     
     onSubmit(taskData);
     
