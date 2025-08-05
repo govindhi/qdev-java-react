@@ -9,6 +9,7 @@ A simple task management application with a Java Spring Boot backend and React f
 - Filter tasks by status (all, active, completed)
 - Set task priority (low, medium, high)
 - Set due dates for tasks
+- **Light/Dark Mode Toggle** - Switch between light and dark themes with automatic persistence
 
 
 ## Tech Stack
@@ -24,6 +25,7 @@ A simple task management application with a Java Spring Boot backend and React f
 - React 18
 - Axios for API calls
 - CSS for styling
+- React Context API for theme management
 
 ## Project Structure
 
@@ -45,9 +47,18 @@ task-manager/
     ├── public/              # Static files
     ├── src/
     │   ├── components/      # React components
+    │   │   ├── TaskForm.js
+    │   │   ├── TaskList.js
+    │   │   ├── TaskItem.js
+    │   │   ├── TaskFilter.js
+    │   │   └── ThemeToggle.js  # Light/Dark mode toggle
+    │   ├── contexts/        # React contexts
+    │   │   └── ThemeContext.js # Theme management
     │   ├── services/        # API service layer
+    │   ├── __tests__/       # Test files
     │   ├── App.js           # Main application component
-    │   └── index.js         # Entry point
+    │   ├── index.js         # Entry point
+    │   └── index.css        # Global styles with theme support
     └── package.json         # npm configuration
 ```
 

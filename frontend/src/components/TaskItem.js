@@ -36,15 +36,13 @@ const TaskItem = ({ task, onDelete, onToggleCompletion, onEdit }) => {
       <div className="task-actions">
         <button 
           onClick={() => onToggleCompletion(task.id)}
-          className="btn"
-          style={{ backgroundColor: task.completed ? '#4caf50' : '#2196f3', color: 'white' }}
+          className={`btn ${task.completed ? 'btn-success' : 'btn-info'}`}
         >
           {task.completed ? 'Completed' : 'Complete'}
         </button>
         <button 
           onClick={() => onEdit(task)}
-          className="btn"
-          style={{ backgroundColor: '#ff9800', color: 'white' }}
+          className="btn btn-warning"
         >
           Edit
         </button>
