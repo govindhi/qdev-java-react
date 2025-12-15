@@ -5,10 +5,13 @@ A simple task management application with a Java Spring Boot backend and React f
 ## Features
 
 - Create, read, update, and delete tasks
+- **Enhanced Edit Task Functionality** with visual indicators and user feedback
 - Mark tasks as completed
 - Filter tasks by status (all, active, completed)
 - Set task priority (low, medium, high)
 - Set due dates for tasks
+- Real-time visual feedback for edit operations
+- Intuitive edit mode with distinct styling and notifications
 
 
 ## Tech Stack
@@ -101,3 +104,35 @@ task-manager/
 - `PUT /api/tasks/{id}` - Update a task
 - `PATCH /api/tasks/{id}/toggle` - Toggle task completion status
 - `DELETE /api/tasks/{id}` - Delete a task
+
+## Edit Task Feature
+
+The application includes a comprehensive edit task functionality with the following enhancements:
+
+### How to Edit a Task
+
+1. **Click the Edit Button**: Each task has an orange "Edit" button (✏️ Edit) in the task actions area
+2. **Visual Feedback**: When editing:
+   - The task form switches to "Edit Mode" with orange styling and an edit icon
+   - The task being edited is highlighted with an orange border and "Currently editing" indicator
+   - A notification shows which task you're editing
+3. **Make Changes**: Modify any task fields (title, description, priority, due date)
+4. **Save or Cancel**: 
+   - Click "💾 Update Task" to save changes
+   - Click "❌ Cancel" to exit edit mode without saving
+5. **Success Confirmation**: A green success message confirms when the task is updated
+
+### Edit Mode Visual Indicators
+
+- **Form Styling**: Orange background and border when in edit mode
+- **Task Highlighting**: The task being edited has a distinct orange highlight
+- **Button States**: Edit buttons are disabled for the task currently being edited
+- **Icons and Emojis**: Visual cues throughout the interface (✏️, 💾, ❌, ✅)
+- **Success Messages**: Clear feedback when operations complete successfully
+
+### Technical Implementation
+
+- **Backend**: RESTful PUT endpoint at `/api/tasks/{id}` handles task updates
+- **Frontend**: React state management with visual feedback and form validation
+- **Real-time Updates**: Immediate UI updates without page refresh
+- **Error Handling**: Comprehensive error messages and recovery options

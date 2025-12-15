@@ -30,6 +30,25 @@ code {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.task-form.edit-mode {
+  background-color: #fff3e0;
+  border: 2px solid #ff9800;
+  box-shadow: 0 4px 8px rgba(255, 152, 0, 0.2);
+}
+
+.task-form.edit-mode h2 {
+  color: #e65100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.task-form.edit-mode h2::before {
+  content: "✏️";
+  font-size: 1.2em;
 }
 
 .form-group {
@@ -64,6 +83,59 @@ code {
   cursor: pointer;
   font-size: 16px;
   font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-edit {
+  background-color: #ff9800;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-edit:hover {
+  background-color: #f57c00;
+  transform: translateY(-1px);
+}
+
+.btn-edit::before {
+  content: "✏️";
+  font-size: 0.9em;
+}
+
+.btn-update {
+  background-color: #ff9800;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-update:hover {
+  background-color: #f57c00;
+}
+
+.btn-update::before {
+  content: "💾";
+  font-size: 0.9em;
+}
+
+.btn-cancel {
+  background-color: #757575;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-cancel:hover {
+  background-color: #616161;
+}
+
+.btn-cancel::before {
+  content: "❌";
+  font-size: 0.8em;
 }
 
 .btn-primary {
@@ -89,6 +161,26 @@ code {
   padding: 0;
 }
 
+.task-item.editing {
+  background-color: #fff3e0;
+  border: 2px solid #ff9800;
+  box-shadow: 0 4px 8px rgba(255, 152, 0, 0.2);
+  transform: scale(1.02);
+}
+
+.task-item.editing::before {
+  content: "Currently editing this task";
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  background-color: #ff9800;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
 .task-item {
   background-color: white;
   padding: 15px;
@@ -98,6 +190,8 @@ code {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
 .task-item.completed {
@@ -160,4 +254,30 @@ code {
 
 .priority-low {
   border-left: 4px solid #4caf50;
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border-left: 4px solid #f44336;
+}
+
+.success-message {
+  background-color: #e8f5e8;
+  color: #2e7d32;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border-left: 4px solid #4caf50;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.success-message::before {
+  content: "✅";
+  font-size: 1.1em;
 }
