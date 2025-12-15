@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TaskItem = ({ task, onDelete, onToggleCompletion, onEdit }) => {
+const TaskItem = ({ task, onDelete, onToggleCompletion, onEdit, isEditing }) => {
   const formatDate = (dateString) => {
     if (!dateString) return '';
     const date = new Date(dateString);
@@ -21,7 +21,7 @@ const TaskItem = ({ task, onDelete, onToggleCompletion, onEdit }) => {
   };
 
   return (
-    <li className={`task-item ${task.completed ? 'completed' : ''} ${getPriorityClass()}`}>
+    <li className={`task-item ${task.completed ? 'completed' : ''} ${getPriorityClass()} ${isEditing ? 'editing' : ''}`}>
       <div className="task-content">
         <h3 className="task-title">{task.title}</h3>
         {task.description && <p className="task-description">{task.description}</p>}
@@ -43,8 +43,9 @@ const TaskItem = ({ task, onDelete, onToggleCompletion, onEdit }) => {
         </button>
         <button 
           onClick={() => onEdit(task)}
-          className="btn"
-          style={{ backgroundColor: '#ff9800', color: 'white' }}
+          className="btn btn-edit"
+          disabled={isEditing}
+          title={isEditing ? "Currently editing this task" : "Edit this task"}
         >
           Edit
         </button>

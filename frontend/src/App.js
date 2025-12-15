@@ -10,6 +10,7 @@ function App() {
   const [error, setError] = useState(null);
   const [filter, setFilter] = useState('all');
   const [editingTask, setEditingTask] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   useEffect(() => {
     fetchTasks();
@@ -33,6 +34,8 @@ function App() {
     try {
       const newTask = await createTask(taskData);
       setTasks([newTask, ...tasks]);
+      setSuccessMessage('Task created successfully!');
+      setTimeout(() => setSuccessMessage(null), 3000);
     } catch (err) {
       setError('Failed to create task. Please try again.');
       console.error('Error creating task:', err);
@@ -44,6 +47,8 @@ function App() {
       const updatedTask = await updateTask(id, taskData);
       setTasks(tasks.map(task => task.id === id ? updatedTask : task));
       setEditingTask(null);
+      setSuccessMessage(`Task "${updatedTask.title}" updated successfully!`);
+      setTimeout(() => setSuccessMessage(null), 3000);
     } catch (err) {
       setError('Failed to update task. Please try again.');
       console.error('Error updating task:', err);
@@ -72,6 +77,8 @@ function App() {
 
   const handleEditTask = (task) => {
     setEditingTask(task);
+    setSuccessMessage(null); // Clear any existing success messages
+    setError(null); // Clear any existing error messages
   };
 
   const filteredTasks = tasks.filter(task => {
@@ -88,6 +95,7 @@ function App() {
       </div>
       
       {error && <div className="error-message">{error}</div>}
+      {successMessage && <div className="success-message">{successMessage}</div>}
       
       <TaskForm 
         onSubmit={editingTask ? (taskData) => handleUpdateTask(editingTask.id, taskData) : handleCreateTask} 
@@ -105,6 +113,7 @@ function App() {
           onDelete={handleDeleteTask} 
           onToggleCompletion={handleToggleCompletion}
           onEdit={handleEditTask}
+          editingTaskId={editingTask?.id}
         />
       )}
     </div>
