@@ -1,3 +1,27 @@
+:root {
+  --bg-primary: #f5f5f5;
+  --bg-secondary: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #666666;
+  --text-tertiary: #888888;
+  --border-color: #dddddd;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --btn-complete: #2196f3;
+  --btn-edit: #ff9800;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --text-tertiary: #808080;
+  --border-color: #404040;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --btn-complete: #1976d2;
+  --btn-edit: #f57c00;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,7 +29,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f5f5;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 code {
@@ -22,14 +48,55 @@ code {
 .header {
   text-align: center;
   margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.header h1 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.theme-toggle-btn {
+  position: absolute;
+  right: 0;
+  background-color: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px var(--shadow);
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px var(--shadow);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95);
 }
 
 .task-form {
-  background-color: white;
+  background-color: var(--bg-secondary);
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--shadow);
   margin-bottom: 20px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.task-form h2 {
+  color: var(--text-primary);
+  margin-top: 0;
 }
 
 .form-group {
@@ -40,6 +107,7 @@ code {
   display: block;
   margin-bottom: 5px;
   font-weight: 600;
+  color: var(--text-primary);
 }
 
 .form-group input,
@@ -47,9 +115,19 @@ code {
 .form-group select {
   width: 100%;
   padding: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   font-size: 16px;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #4caf50;
 }
 
 .form-group textarea {
@@ -64,6 +142,7 @@ code {
   cursor: pointer;
   font-size: 16px;
   font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .btn-primary {
@@ -84,20 +163,39 @@ code {
   background-color: #d32f2f;
 }
 
+.btn-complete {
+  background-color: var(--btn-complete);
+  color: white;
+}
+
+.btn-complete:hover {
+  opacity: 0.9;
+}
+
+.btn-edit {
+  background-color: var(--btn-edit);
+  color: white;
+}
+
+.btn-edit:hover {
+  opacity: 0.9;
+}
+
 .task-list {
   list-style: none;
   padding: 0;
 }
 
 .task-item {
-  background-color: white;
+  background-color: var(--bg-secondary);
   padding: 15px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--shadow);
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: all 0.3s ease;
 }
 
 .task-item.completed {
@@ -115,16 +213,17 @@ code {
 .task-title {
   margin: 0 0 5px;
   font-size: 18px;
+  color: var(--text-primary);
 }
 
 .task-description {
   margin: 0;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .task-meta {
   font-size: 14px;
-  color: #888;
+  color: var(--text-tertiary);
   margin-top: 5px;
 }
 
@@ -143,11 +242,18 @@ code {
   padding: 8px 16px;
   cursor: pointer;
   border-bottom: 2px solid transparent;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.filter-tab:hover {
+  color: var(--text-primary);
 }
 
 .filter-tab.active {
   border-bottom-color: #4caf50;
   font-weight: 600;
+  color: var(--text-primary);
 }
 
 .priority-high {
@@ -160,4 +266,14 @@ code {
 
 .priority-low {
   border-left: 4px solid #4caf50;
+}
+
+.error-message {
+  background-color: #f44336;
+  color: white;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 600;
 }
