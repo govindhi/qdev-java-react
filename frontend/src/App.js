@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList';
 import TaskFilter from './components/TaskFilter';
+import ThemeToggle from './components/ThemeToggle';
 import { getAllTasks, createTask, updateTask, deleteTask, toggleTaskCompletion } from './services/taskService';
 
 function App() {
@@ -85,6 +86,7 @@ function App() {
     <div className="container">
       <div className="header">
         <h1>Task Manager</h1>
+        <ThemeToggle />
       </div>
       
       {error && <div className="error-message">{error}</div>}
