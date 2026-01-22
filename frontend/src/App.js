@@ -31,22 +31,26 @@ function App() {
 
   const handleCreateTask = async (taskData) => {
     try {
+      setError(null);
       const newTask = await createTask(taskData);
       setTasks([newTask, ...tasks]);
     } catch (err) {
-      setError('Failed to create task. Please try again.');
+      setError('Failed to create task. Please check your input and try again.');
       console.error('Error creating task:', err);
     }
   };
 
   const handleUpdateTask = async (id, taskData) => {
     try {
+      setError(null);
       const updatedTask = await updateTask(id, taskData);
       setTasks(tasks.map(task => task.id === id ? updatedTask : task));
       setEditingTask(null);
+      // Success feedback could be added here if needed
     } catch (err) {
-      setError('Failed to update task. Please try again.');
+      setError('Failed to update task. Please check your input and try again.');
       console.error('Error updating task:', err);
+      // Keep editing mode active so user can retry
     }
   };
 
@@ -72,6 +76,9 @@ function App() {
 
   const handleEditTask = (task) => {
     setEditingTask(task);
+    setError(null);
+    // Scroll to form when editing
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const filteredTasks = tasks.filter(task => {
@@ -87,7 +94,7 @@ function App() {
         <h1>Task Manager</h1>
       </div>
       
-      {error && <div className="error-message">{error}</div>}
+      {error && <div className="error-message-banner">{error}</div>}
       
       <TaskForm 
         onSubmit={editingTask ? (taskData) => handleUpdateTask(editingTask.id, taskData) : handleCreateTask} 
